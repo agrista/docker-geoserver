@@ -1,0 +1,34 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "geoserver",
+      "image": "841383619717.dkr.ecr.eu-central-1.amazonaws.com/geoserver:2.14.1",
+      "memory": 1056,
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "mountPoints": [
+        {
+          "containerPath": "/var/local/geoserver",
+          "sourceVolume": "efs-geoserver"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "/efs/geoserver"
+      },
+      "name": "efs-geoserver"
+    }
+  ],
+  "networkMode": "bridge",
+  "placementConstraints": [],
+  "family": "geoserver"
+}
